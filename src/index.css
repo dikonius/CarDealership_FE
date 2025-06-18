@@ -100,7 +100,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem; /* Reduced from 0.5rem for smaller spacing between fields */
+  gap: 0.1rem; /* Reduced from 0.5rem for smaller spacing between fields */
   width: 100%;
   max-width: 400px;
 }
@@ -142,8 +142,8 @@
 .error {
   color: #dc2626;
   font-size: 0.875rem;
-  height: 1.25rem; /* Reserves space for error messages */
-  line-height: 1.25rem;
+  height: 0.01rem; /* Reserves space for error messages */
+  line-height: 0.01rem;
 }
 
 /* API Error */
