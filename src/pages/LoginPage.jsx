@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { loginSchema } from '../data/loginSchema';
+import Logo from '../images/Vector1.svg';
+import BigWheel from '../images/Vector.svg';
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -42,14 +44,28 @@ function LoginPage() {
 
   return (
     <div className="page-container">
-      <h1 className="page-title">Inloggning</h1>
+		<div className="login-wrapper">
+			<div className="logo-container">
+				<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
+				<div className='text-container'>
+					<h1>Verkstadium</h1>
+					<p>Vi har koll på verkstäder nära dig!</p>
+
+					
+				</div>
+			</div>
+			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		
+      
       {state?.success && <p className="success">{state.success}</p>}
       {errors.api && <p className="error api-error">{errors.api}</p>}
       <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
+		 <div className="form-group">
+          <label htmlFor="email">E-post:</label>
           <input
             type="email"
             name="email"
+            id="email"
             placeholder="E-post"
             className="input"
             value={formData.email}
@@ -57,10 +73,13 @@ function LoginPage() {
           />
           <p className="error">{errors.email || '\u00A0'}</p>
         </div>
+
         <div className="form-group">
+          <label htmlFor="password">Lösenord:</label>
           <input
             type="password"
             name="password"
+            id="password"
             placeholder="Lösenord"
             className="input"
             value={formData.password}
@@ -68,11 +87,19 @@ function LoginPage() {
           />
           <p className="error">{errors.password || '\u00A0'}</p>
         </div>
+
         <button type="submit" className="button button-secondary">
           Logga in
         </button>
+
+
+	  
+
+
+      
       </form>
       <Link to="/register" className="link">Har du inget konto? Registrera dig</Link>
+	  </div>
     </div>
   );
 }
