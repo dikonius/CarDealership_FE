@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
+import './StartPage.css';
 
 function StartPage() {
   return (
-    <div className="page-container">
-      <div className="login-wrapper">
+    <div className="start-page-container">
+      <div className="start-login-wrapper">
 		<div className="logo-container">
 				<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
 					<div className='text-container'>

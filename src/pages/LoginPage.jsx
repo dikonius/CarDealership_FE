@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { loginSchema } from '../data/loginSchema';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
+import './LoginPage.css';
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -53,6 +54,7 @@ function LoginPage() {
 
 					
 				</div>
+				</div>
 			</div>
 			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
 		
@@ -99,7 +101,7 @@ function LoginPage() {
       
       </form>
       <Link to="/register" className="link">Har du inget konto? Registrera dig</Link>
-	  </div>
+	  
     </div>
   );
 }
