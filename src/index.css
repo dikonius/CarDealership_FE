@@ -223,9 +223,40 @@
 /* Success Message */
 .success {
   color: #10b981;
-  font-size: 1rem;
+  font-size: 1.125rem; /* Match page-text for prominence */
   margin-bottom: 1rem;
   text-align: center;
+}
+
+/* Success Message Container */
+.success-message {
+  width: 100%;
+  max-width: 400px; /* Match .form and .email-preview */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Email Preview */
+.email-preview {
+  width: 100%;
+  max-width: 400px; /* Match .form max-width */
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.email-preview pre.textarea {
+  white-space: pre-wrap; /* Wrap long lines while preserving newlines */
+  word-break: break-word; /* Break long words if necessary */
+  background-color: #f9fafb; /* Light background for readability */
+  padding: 0.5rem;
 }
 
 /* Car List */
@@ -275,6 +306,20 @@
 
   .form {
     max-width: 100%;
+  }
+
+  .email-preview {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+
+  .success-message {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+
+  .success {
+    font-size: 0.875rem; /* Adjusted for smaller screens */
   }
 
   .input,
@@ -343,8 +388,7 @@
   }
 
   .error,
-  .api-error,
-  .success {
+  .api-error {
     font-size: 0.625rem;
     margin-bottom: 0.5rem;
   }
@@ -371,6 +415,20 @@
 
   .form {
     max-width: 100%;
+  }
+
+  .email-preview {
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+
+  .success-message {
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+
+  .success {
+    font-size: 1rem; /* Adjusted for mobile */
   }
 
   .input,
@@ -422,8 +480,7 @@
   }
 
   .error,
-  .api-error,
-  .success {
+  .api-error {
     font-size: 0.75rem;
   }
 
@@ -448,6 +505,20 @@
 
   .form {
     max-width: 360px;
+  }
+
+  .email-preview {
+    max-width: 360px;
+    padding: 1rem;
+  }
+
+  .success-message {
+    max-width: 360px;
+    padding: 1rem;
+  }
+
+  .success {
+    font-size: 1.1rem; /* Match page-text */
   }
 
   .button-group {
