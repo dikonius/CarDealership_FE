@@ -30,14 +30,43 @@ function LoginPage() {
       return;
     }
 
-    // Placeholder for backend submission
+    // *** START: Local Storage Implementation ***
     try {
-      // Example: await fetch('/api/login', { method: 'POST', body: JSON.stringify(formData) });
-      console.log('Login submitted:', formData);
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const user = users.find(
+        (u) => u.email === formData.email && u.password === formData.password
+      );
+      if (!user) {
+        setErrors({ api: 'Fel e-post eller lösenord. Försök igen.' });
+        return;
+      }
+
+      // Simulate token for ProtectedRoute
+      localStorage.setItem('userToken', btoa(JSON.stringify({ email: user.email, exp: Date.now() + 3600000 })));
       navigate('/home');
     } catch (err) {
-      setErrors({ api: 'Fel e-post eller lösenord. Försök igen.' });
+      setErrors({ api: 'Kunde inte logga in. Försök igen senare.' });
     }
+    // *** END: Local Storage Implementation ***
+
+    // *** REPLACE WITH API CALL IN FUTURE ***
+    /*
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Fel e-post eller lösenord. Försök igen.');
+      }
+      localStorage.setItem('userToken', data.token);
+      navigate('/home');
+    } catch (err) {
+      setErrors({ api: err.message });
+    }
+    */
   };
 
   return (

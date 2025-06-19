@@ -11,6 +11,8 @@ import HomePage from './pages/HomePage.jsx';
 import FeatureFormPage from './pages/MainFeaturePage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import MyPagesPage from './pages/MyPages.jsx';
+import SettingsPage from './pages/SettingsPage.jsx';
+import CarsPage from './pages/CarsPage.jsx';
 
 const router = createHashRouter([
   {
@@ -43,6 +45,14 @@ const router = createHashRouter([
           {
             path: '/my-pages',
             element: <MyPagesPage />,
+          },
+          {
+            path: '/my-pages/settings',
+            element: <SettingsPage />,
+          },
+          {
+            path: '/my-pages/cars',
+            element: <CarsPage />,
           },
           {
             path: '/feature-form',

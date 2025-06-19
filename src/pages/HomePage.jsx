@@ -6,12 +6,12 @@ function HomePage() {
       <h1 className="page-title">Hem</h1>
       <p className="page-text">Välkommen till Verkstadium!</p>
       
-      <Link
+      {/* <Link
         to="/my-pages"
         className="button button-primary"
       >
         Mina sidor
-      </Link>
+      </Link> */}
       
       <Link
         to="/feature-form"

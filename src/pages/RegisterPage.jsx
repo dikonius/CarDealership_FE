@@ -36,14 +36,56 @@ function RegisterPage() {
       return;
     }
 
-    // Placeholder for backend submission
+    // *** START: Local Storage Implementation ***
     try {
-      // Example: await fetch('/api/register', { method: 'POST', body: JSON.stringify(formData) });
-      console.log('Form submitted:', formData);
+      // Check for duplicate email in localStorage
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      if (users.some((user) => user.email === formData.email)) {
+        setErrors({ email: 'E-postadressen används redan' });
+        return;
+      }
+
+      // Simulate password hashing (store plain password for demo; replace with hashing in production)
+      const newUser = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        mobile: formData.mobile,
+        address: formData.address,
+        postcode: formData.postcode,
+        city: formData.city,
+        password: formData.password, // WARNING: In production, hash this!
+        createdAt: new Date().toISOString(),
+      };
+
+      // Save user to localStorage
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+
       navigate('/login', { state: { success: 'Registreringen lyckades! Logga in för att fortsätta.' } });
     } catch (err) {
       setErrors({ api: 'Kunde inte registrera. Försök igen senare.' });
     }
+    // *** END: Local Storage Implementation ***
+
+    // *** REPLACE WITH API CALL IN FUTURE ***
+    /*
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(JSON.stringify(data.error || { api: 'Ogiltig inmatning. Kontrollera dina uppgifter.' }));
+      }
+      navigate('/login', { state: { success: 'Registreringen lyckades! Logga in för att fortsätta.' } });
+    } catch (err) {
+      const errorObj = JSON.parse(err.message);
+      setErrors(errorObj);
+    }
+    */
   };
 
   return (
