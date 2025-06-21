@@ -1,0 +1,55 @@
+/* === Grundlayout === */
+.start-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background-color: #ffffff;
+ 
+}
+
+/* === Wrapper för login-formulär === */
+.start-login-wrapper {
+  width: 100%;
+  max-width: 40em;
+  position: relative;
+  z-index: 2;
+
+ 
+}
+
+
+/* === Logo-sektion === */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(to right, #b7d8f2, #84c0f1);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 10rem;
+}
+
+.text-container-right {
+  display: flex;
+  gap:rem;
+  background: linear-gradient(to right, #b7d8f2, #84c0f1);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  margin-left: 50%;
+  align-self: flex-end; /* högerställd */
+}
+
+.text-container-left {
+  display: flex;
+  gap: 1rem;
+  background: linear-gradient(to right, #b7d8f2, #84c0f1);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  margin-right: 50%;
+  align-self: flex-start; /* vänsterställd */
+}

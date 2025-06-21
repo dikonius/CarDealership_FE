@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+import Logo from '../images/Vector1.svg';
+import BigWheel from '../images/Vector.svg';
+import './HomePage.css';
 
 function HomePage() {
   return (
