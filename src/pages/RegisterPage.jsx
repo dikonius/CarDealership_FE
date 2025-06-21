@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerSchema } from '../data/registerSchema';
+import Logo from '../images/Vector1.svg';
+import BigWheel from '../images/Vector.svg';
+import './RegisterPage.css';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -48,9 +51,22 @@ function RegisterPage() {
 
   return (
     <div className="page-container">
+		<div className="logo-container">
+						<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
+							<div className='text-container'>
+								<h1>Verkstadium</h1>
+								<p>Vi har koll på verkstäder nära dig!</p>
+								
+			  
+								
+							</div>
+						</div>
+						<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
       <h1 className="page-title">Registrering</h1>
       {errors.api && <p className="error api-error">{errors.api}</p>}
       <form className="form" onSubmit={handleSubmit}>
+		
+
         <div className="form-group">
           <input
             type="text"
