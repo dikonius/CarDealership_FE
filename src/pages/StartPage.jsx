@@ -20,14 +20,14 @@ function StartPage() {
 			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
 		
 		<div className='register-container'>
-			<p>Ny användare?</p>
-			<p>Registrera dig!</p>
+			<p className='welcome-text'>Ny användare?</p>
+			<p className='welcome-text'>Registrera dig!</p>
 
 		</div>
 
 		<div className='login-container'>
-			<p>Redan användare?</p>
-			<p>Logga in!</p>
+			<p className='welcome-text'>Redan användare?</p>
+			<p className='welcome-text'>Logga in!</p>
 		</div> 
 		</div>
 
