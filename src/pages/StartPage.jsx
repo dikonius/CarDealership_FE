@@ -18,7 +18,7 @@ function StartPage() {
 					</div>
 				</div>
 			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
-		</div>
+		
 		<div className='register-container'>
 			<p>Ny användare?</p>
 			<p>Registrera dig!</p>
@@ -28,6 +28,7 @@ function StartPage() {
 		<div className='login-container'>
 			<p>Redan användare?</p>
 			<p>Logga in!</p>
+		</div> 
 		</div>
 
 

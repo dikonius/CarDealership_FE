@@ -32,6 +32,28 @@
   margin-bottom: 10rem;
 }
 
+.register-container {
+  display: flex;
+  gap: 1rem;
+  background: linear-gradient(to right, #b7d8f2, #84c0f1);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  margin-left: 50%;
+  align-self: flex-end; /* högerställd */
+}
+
+.login-container {
+  display: flex;
+  gap: 1rem;
+  background: linear-gradient(to right, #b7d8f2, #84c0f1);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  margin-right: 50%;
+  align-self: flex-start; /* vänsterställd */
+}
+
 .logo {
   width: 100px;
   height: auto;
@@ -52,11 +74,12 @@
 
 /* === Bakgrundsbild === */
 .background-wheel {
-  position: absolute;
-  right: 0em;
+  position: fixed;
+  right: 0;
   top: 15em;
   width: 40em;
   max-width: 140%;
   opacity: 0.5;
   z-index: 1;
+  pointer-events: none; /* så att den inte stör klick */
 }
