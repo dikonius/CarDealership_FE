@@ -62,11 +62,11 @@ function RegisterPage() {
 							</div>
 						</div>
 						<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
-      <h1 className="page-title">Registrering</h1>
+      <h1 className="page-title">Registrera ett konto!</h1>
       {errors.api && <p className="error api-error">{errors.api}</p>}
       <form className="form" onSubmit={handleSubmit}>
 		
-
+    <div className='form-grid'>
         <div className="form-group">
           <input
             type="text"
@@ -166,10 +166,14 @@ function RegisterPage() {
           />
           <p className="error">{errors.confirmPassword || '\u00A0'}</p>
         </div>
-        <button type="submit" className="button button-primary">
-          Registrera
-        </button>
+		</div>
+        <div className="form-button-wrapper">
+          <button type="submit" className="register-button">
+      Registrera
+          </button>
+        </div>
       </form>
+	  
       <Link to="/login" className="link">Har du redan ett konto? Logga in</Link>
     </div>
   );
