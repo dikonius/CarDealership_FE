@@ -7,7 +7,7 @@ function StartPage() {
   return (
     <div className="start-page-container">
       <div className="start-login-wrapper">
-		<div className="logo-container">
+		 <div className="logo-container">
 				<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
 					<div className='text-container'>
 						<h1>Verkstadium</h1>
@@ -19,16 +19,16 @@ function StartPage() {
 				</div>
 			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
 		
-		<div className='register-container'>
+		 <div className='register-container'>
 			<p className='welcome-text'>Ny användare?</p>
 			<p className='welcome-text'>Registrera dig!</p>
 
-		</div>
+		 </div>
 
-		<div className='login-container'>
+		 <div className='login-container'>
 			<p className='welcome-text'>Redan användare?</p>
 			<p className='welcome-text'>Logga in!</p>
-		</div> 
+		 </div> 
 		</div>
 
 

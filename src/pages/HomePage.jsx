@@ -19,26 +19,23 @@ function HomePage() {
 							</div>
 						</div>
 					<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
-				</div>
+				
 				<div className='text-container-right'>
 					<p>Har du problem med din bil?</p>
 
 				</div>
 				<div className='text-container-left'>
-					<p>Ingen fara!</p>
+					<p>Ingen fara!</p> 
+					
 					<p>Skriv ner problemen här hos oss, vi löser en nära verkstad till billigast pris innom kort.</p>
+					</div>
 
 				</div>
-				<p>Hjälpen finns bara ett knapptryck bort</p>
-				<button>Ett knapptryck bort</button>
+				<p className='button-text'>Hjälpen finns bara ett knapptryck bort</p>
+				
       
       
-      <Link
-        to="/my-pages"
-        className="button button-primary"
-      >
-        Mina sidor
-      </Link>
+      
       
       <Link
         to="/feature-form"
