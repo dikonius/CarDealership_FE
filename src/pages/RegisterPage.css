@@ -1,4 +1,4 @@
-/* === Grundlayout === */
+
 .page-container {
   display: flex;
   justify-content: center;
@@ -10,8 +10,7 @@
  
 }
 
-/* === Wrapper för login-formulär === */
-.start-login-wrapper {
+.login-wrapper {
   width: 100%;
   max-width: 40em;
   position: relative;
@@ -20,8 +19,6 @@
  
 }
 
-
-/* === Logo-sektion === */
 .logo-container {
   display: flex;
   align-items: center;
@@ -31,7 +28,7 @@
   border-radius: 8px;
   margin-bottom: 10rem;
 }
-/* === Bakgrundsbild === */
+
 .background-wheel {
   position: fixed;
   right: 0;

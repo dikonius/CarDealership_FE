@@ -47,7 +47,9 @@ function LoginPage() {
     <div className="page-container">
 		<div className="login-wrapper">
 			<div className="logo-container">
-				<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
+				
+                  <img src={Logo} alt="Verkstadium logotyp" className="logo" />
+                
 				<div className='text-container'>
 					<h1>Verkstadium</h1>
 					<p>Vi har koll på verkstäder nära dig!</p>

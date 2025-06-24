@@ -12,7 +12,7 @@ function StartPage() {
 					<div className='text-container'>
 						<h1>Verkstadium</h1>
 						<p>Vi har koll på verkstäder nära dig!</p>
-						<p>Hur funkar det?</p>
+						<Link to="/how-it-works" className='how-it-works'>Hur funkar det?</Link>
 	  
 						
 					</div>
@@ -21,13 +21,13 @@ function StartPage() {
 		
 		 <div className='register-container'>
 			<p className='welcome-text'>Ny användare?</p>
-			<p className='welcome-text'>Registrera dig!</p>
+			<Link to="/register" className="welcome-text">Registrera dig!</Link>
 
 		 </div>
 
 		 <div className='login-container'>
 			<p className='welcome-text'>Redan användare?</p>
-			<p className='welcome-text'>Logga in!</p>
+			<Link to="/login" className="welcome-text">Logga in!</Link>
 		 </div> 
 		</div>
 

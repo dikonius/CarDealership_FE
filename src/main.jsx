@@ -37,6 +37,10 @@ const router = createHashRouter([
             path: '/home',
             element: <HomePage />,
           },
+		   {
+            path: '/my-pages',
+            element: <MyPagesPage />,
+          },
       {
         element: <ProtectedRoute />,
         children: [

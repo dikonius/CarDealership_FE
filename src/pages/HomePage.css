@@ -1,4 +1,4 @@
-/* === Grundlayout === */
+
 .start-page-container {
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
  
 }
 
-/* === Wrapper för login-formulär === */
+
 .start-login-wrapper {
   width: 100%;
   max-width: 40em;
@@ -21,7 +21,7 @@
 }
 
 
-/* === Logo-sektion === */
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -84,4 +84,17 @@
   opacity: 0.5;
   z-index: 1;
   pointer-events: none; 
+}
+.text-container{
+	display: flex;
+	flex-direction: column;
+}
+.how-it-works {
+	text-decoration: none;
+	font-size: 1.4em;
+	
+}
+.my-pages{
+	text-decoration: none;
+	font-size: 1.4em;
 }

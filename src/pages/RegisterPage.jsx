@@ -51,6 +51,7 @@ function RegisterPage() {
 
   return (
     <div className="page-container">
+		<div className="login-wrapper">
 		<div className="logo-container">
 						<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
 							<div className='text-container'>
@@ -60,6 +61,7 @@ function RegisterPage() {
 			  
 								
 							</div>
+						</div>
 						</div>
 						<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
       <h1 className="page-title">Registrera ett konto!</h1>

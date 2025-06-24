@@ -12,8 +12,8 @@ function HomePage() {
 							<div className='text-container'>
 								<h1>Verkstadium</h1>
 								<p>Vi har koll på verkstäder nära dig!</p>
-								<p>Hur funkar det?</p>
-								<p>Mina sidor</p>
+								<Link to="/how-it-works" className='how-it-works'>Hur funkar det?</Link>
+								<Link to="/my-pages" className='my-pages'>Mina sidor</Link>
 			  
 								
 							</div>
