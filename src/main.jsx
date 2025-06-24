@@ -41,6 +41,10 @@ const router = createHashRouter([
             path: '/my-pages',
             element: <MyPagesPage />,
           },
+		  {
+            path: '/feature-form',
+            element: <FeatureFormPage />,
+          },
       {
         element: <ProtectedRoute />,
         children: [
@@ -52,10 +56,7 @@ const router = createHashRouter([
             path: '/my-pages',
             element: <MyPagesPage />,
           },
-          {
-            path: '/feature-form',
-            element: <FeatureFormPage />,
-          },
+          
         ],
       },
     ],

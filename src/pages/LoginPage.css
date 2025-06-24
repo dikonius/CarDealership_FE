@@ -48,7 +48,7 @@
   color: #333;
 }
 
-/* === Bakgrundsbild === */
+
 .background-wheel {
   position: absolute;
   right: 0em;
@@ -59,7 +59,7 @@
   z-index: 1;
 }
 
-/* === Formulär === */
+
 form.form {
   background: transparent;
   display: flex;
