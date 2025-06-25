@@ -35,13 +35,25 @@ const router = createHashRouter([
         path: '/login',
         element: <LoginPage />,
       },
-      {
-        element: <ProtectedRoute />,
-        children: [
-          {
+	  {
             path: '/home',
             element: <HomePage />,
           },
+		   {
+            path: '/my-pages',
+            element: <MyPagesPage />,
+          },
+		  {
+            path: '/feature-form',
+            element: <FeatureFormPage />,
+          },
+      {
+        element: <ProtectedRoute />,
+        children: [
+        //   {
+        //     path: '/home',
+        //     element: <HomePage />,
+        //   },
           {
             path: '/my-pages',
             element: <MyPagesPage />,

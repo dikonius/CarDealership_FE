@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useCars from '../data/useCars';
 import FormComponent from '../components/FeatureFormComponent';
 import EmailPreviewComponent from '../components/EmailPreviewComponent';
 import SuccessMessageComponent from '../components/SuccessMessageComponent';
+import Logo from '../images/Vector1.svg';
+import BigWheel from '../images/Vector.svg';
+import './MainFeaturePage.css';
 
 function FeatureFormPage() {
   const { cars } = useCars();
@@ -102,11 +105,7 @@ function FeatureFormPage() {
       localStorage.setItem('serviceRequests', JSON.stringify(submissions));
 
       // Generate AI-reformed email content
-      const aiReformedReport = `Hej,\n\nJag söker en offert för reparation av min bil (${
-        formData.selectedCar
-      }) baserat på följande diagnosrapport:\n\n${
-        formData.diagnosisReport
-      }\n\nVänligen ange kostnad och tid för reparation.\n\nVänliga hälsningar,\n${user.firstName} ${user.lastName}`;
+      const aiReformedReport = `Hej,\n\nJag söker en offert för reparation av min bil (${formData.selectedCar}) baserat på följande diagnosrapport:\n\n${formData.diagnosisReport}\n\nVänligen ange kostnad och tid för reparation.\n\nVänliga hälsningar,\n${user.firstName} ${user.lastName}`;
       setEmailContent(aiReformedReport);
       setShowEmail(true);
       setIsEditing(false);
@@ -159,31 +158,66 @@ function FeatureFormPage() {
 
   return (
     <div className="page-container">
-      {emailSent ? (
-        <SuccessMessageComponent success={success} />
-      ) : showEmail ? (
+      <div className="login-wrapper">
+        <div className="logo-container">
+          <Link to="/home">
+            <img src={Logo} alt="Verkstadium logotyp" className="logo" />
+          </Link>
+          <div className="text-container">
+            <h1>Verkstadium</h1>
+            <p>Vi har koll på verkstäder nära dig!</p>
+            <Link to="/how-it-works" className="how-it-works">
+              Hur funkar det?
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+      <h1 className="page-title">Funktionsformulär</h1>
+
+      <form className="form" onSubmit={handleSubmit}>
+        {showEmail ? (
+          <input
+            type="text"
+            placeholder="Ange din information"
+            className="input"
+            name="diagnosisReport"
+            value={formData.diagnosisReport}
+            onChange={handleChange}
+          />
+        ) : (
+          <FormComponent
+            cars={cars}
+            formData={formData}
+            errors={errors}
+            success={success}
+            isEditing={isEditing}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleCancelEdit={handleCancelEdit}
+          />
+        )}
+
+        <button type="submit" className="send-button">
+          Skicka
+        </button>
+      </form>
+
+      <Link to="/home" className="link">
+        Tillbaka till hem
+      </Link>
+
+      {showEmail && (
         <EmailPreviewComponent
-          user={user}
-          formData={formData}
-          emailContent={emailContent}
-          errors={errors}
-          success={success}
-          handleReset={handleReset}
-          handleEditEmail={handleEditEmail}
-          handleSendEmail={handleSendEmail}
-        />
-      ) : (
-        <FormComponent
-          cars={cars}
-          formData={formData}
-          errors={errors}
-          success={success}
-          isEditing={isEditing}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleCancelEdit={handleCancelEdit}
+          content={emailContent}
+          onEdit={handleEditEmail}
+          onSend={handleSendEmail}
+          onCancel={handleCancelEdit}
         />
       )}
+
+      {success && <SuccessMessageComponent message={success} />}
     </div>
   );
 }
