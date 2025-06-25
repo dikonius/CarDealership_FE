@@ -109,7 +109,7 @@ function FeatureFormPage() {
       setEmailContent(aiReformedReport);
       setShowEmail(true);
       setIsEditing(false);
-    } catch {
+    } catch (err) {
       setErrors({ api: 'Kunde inte spara förfrågan. Försök igen.' });
     }
   };
@@ -176,48 +176,35 @@ function FeatureFormPage() {
       <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
       <h1 className="page-title">Funktionsformulär</h1>
 
-      <form className="form" onSubmit={handleSubmit}>
-        {showEmail ? (
-          <input
-            type="text"
-            placeholder="Ange din information"
-            className="input"
-            name="diagnosisReport"
-            value={formData.diagnosisReport}
-            onChange={handleChange}
-          />
-        ) : (
-          <FormComponent
-            cars={cars}
-            formData={formData}
-            errors={errors}
-            success={success}
-            isEditing={isEditing}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            handleCancelEdit={handleCancelEdit}
-          />
-        )}
-
-        <button type="submit" className="send-button">
-          Skicka
-        </button>
-      </form>
+      {showEmail ? (
+        <EmailPreviewComponent
+          user={user}
+          formData={formData}
+          emailContent={emailContent}
+          errors={errors}
+          success={success}
+          handleReset={handleReset}
+          handleEditEmail={handleEditEmail}
+          handleSendEmail={handleSendEmail}
+        />
+      ) : (
+        <FormComponent
+          cars={cars}
+          formData={formData}
+          errors={errors}
+          success={success}
+          isEditing={isEditing}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleCancelEdit={handleCancelEdit}
+        />
+      )}
 
       <Link to="/home" className="link">
         Tillbaka till hem
       </Link>
 
-      {showEmail && (
-        <EmailPreviewComponent
-          content={emailContent}
-          onEdit={handleEditEmail}
-          onSend={handleSendEmail}
-          onCancel={handleCancelEdit}
-        />
-      )}
-
-      {success && <SuccessMessageComponent message={success} />}
+      {success && !showEmail && <SuccessMessageComponent message={success} />}
     </div>
   );
 }
