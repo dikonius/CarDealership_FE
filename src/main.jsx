@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
-// import './index.css';
 import App from './App.jsx';
 import StartPage from './pages/StartPage.jsx';
 import HowItWorksPage from './pages/HowItWorksPage.jsx';

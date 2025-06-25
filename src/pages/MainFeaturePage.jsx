@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useCars from '../data/useCars';
 import FormComponent from '../components/FeatureFormComponent';
 import EmailPreviewComponent from '../components/EmailPreviewComponent';
 import SuccessMessageComponent from '../components/SuccessMessageComponent';
+import Logo from '../images/Vector1.svg';
+import BigWheel from '../images/Vector.svg';
+import './MainFeaturePage.css';
 
 function FeatureFormPage() {
   const { cars } = useCars();
@@ -21,7 +24,7 @@ function FeatureFormPage() {
   const [success, setSuccess] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [currentSubmissionId, setCurrentSubmissionId] = useState(null);
-  const [emailSent, setEmailSent] = useState(false);
+  const [showSuccessOnly, setShowSuccessOnly] = useState(false);
 
   // Fetch user's details and city from localStorage on component mount
   useEffect(() => {
@@ -102,15 +105,11 @@ function FeatureFormPage() {
       localStorage.setItem('serviceRequests', JSON.stringify(submissions));
 
       // Generate AI-reformed email content
-      const aiReformedReport = `Hej,\n\nJag söker en offert för reparation av min bil (${
-        formData.selectedCar
-      }) baserat på följande diagnosrapport:\n\n${
-        formData.diagnosisReport
-      }\n\nVänligen ange kostnad och tid för reparation.\n\nVänliga hälsningar,\n${user.firstName} ${user.lastName}`;
+      const aiReformedReport = `Hej,\n\nJag söker en offert för reparation av min bil (${formData.selectedCar}) baserat på följande diagnosrapport:\n\n${formData.diagnosisReport}\n\nVänligen ange kostnad och tid för reparation.\n\nVänliga hälsningar,\n${user.firstName} ${user.lastName}`;
       setEmailContent(aiReformedReport);
       setShowEmail(true);
       setIsEditing(false);
-    } catch {
+    } catch (err) {
       setErrors({ api: 'Kunde inte spara förfrågan. Försök igen.' });
     }
   };
@@ -128,7 +127,7 @@ function FeatureFormPage() {
     setSuccess('');
     setIsEditing(false);
     setCurrentSubmissionId(null);
-    setEmailSent(false);
+    setShowSuccessOnly(false);
   };
 
   const handleEditEmail = () => {
@@ -152,37 +151,59 @@ function FeatureFormPage() {
 
   const handleSendEmail = () => {
     console.log('Sending email to repair stations in', formData.city, ':', emailContent);
-    setEmailSent(true);
+    setShowSuccessOnly(true);
     setShowEmail(false);
     setSuccess('E-post har skickats och vi meddelar dig så snart vi får svar.');
   };
 
   return (
     <div className="page-container">
-      {emailSent ? (
-        <SuccessMessageComponent success={success} />
-      ) : showEmail ? (
-        <EmailPreviewComponent
-          user={user}
-          formData={formData}
-          emailContent={emailContent}
-          errors={errors}
-          success={success}
-          handleReset={handleReset}
-          handleEditEmail={handleEditEmail}
-          handleSendEmail={handleSendEmail}
-        />
+      <div className="login-wrapper">
+        <div className="logo-container">
+          <Link to="/home">
+            <img src={Logo} alt="Verkstadium logotyp" className="logo" />
+          </Link>
+          <div className="text-container">
+            <h1>Verkstadium</h1>
+            <p>Vi har koll på verkstäder nära dig!</p>
+            <Link to="/how-it-works" className="how-it-works">
+              Hur funkar det?
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {showSuccessOnly ? (
+        <SuccessMessageComponent message={success} />
       ) : (
-        <FormComponent
-          cars={cars}
-          formData={formData}
-          errors={errors}
-          success={success}
-          isEditing={isEditing}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleCancelEdit={handleCancelEdit}
-        />
+        <>
+          <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+          {/* <h1 className="page-title">Funktionsformulär</h1> */}
+          {showEmail ? (
+            <EmailPreviewComponent
+              user={user}
+              formData={formData}
+              emailContent={emailContent}
+              errors={errors}
+              success={success}
+              handleReset={handleReset}
+              handleEditEmail={handleEditEmail}
+              handleSendEmail={handleSendEmail}
+            />
+          ) : (
+            <FormComponent
+              cars={cars}
+              formData={formData}
+              errors={errors}
+              success={success}
+              isEditing={isEditing}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              handleCancelEdit={handleCancelEdit}
+            />
+          )}
+          
+        </>
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function EmailPreviewComponent({
@@ -34,7 +35,7 @@ function EmailPreviewComponent({
           </button>
         </div>
       </div>
-      <a href="/home" className="link">Tillbaka till hem</a>
+      <Link to="/home" className="link">Tillbaka till hem</Link>
     </>
   );
 }
