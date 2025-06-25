@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
-// import './index.css';
 import App from './App.jsx';
 import StartPage from './pages/StartPage.jsx';
 import HowItWorksPage from './pages/HowItWorksPage.jsx';
@@ -35,25 +34,13 @@ const router = createHashRouter([
         path: '/login',
         element: <LoginPage />,
       },
-	  {
-            path: '/home',
-            element: <HomePage />,
-          },
-		   {
-            path: '/my-pages',
-            element: <MyPagesPage />,
-          },
-		  {
-            path: '/feature-form',
-            element: <FeatureFormPage />,
-          },
       {
         element: <ProtectedRoute />,
         children: [
-        //   {
-        //     path: '/home',
-        //     element: <HomePage />,
-        //   },
+          {
+            path: '/home',
+            element: <HomePage />,
+          },
           {
             path: '/my-pages',
             element: <MyPagesPage />,

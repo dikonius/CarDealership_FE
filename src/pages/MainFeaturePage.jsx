@@ -24,7 +24,7 @@ function FeatureFormPage() {
   const [success, setSuccess] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [currentSubmissionId, setCurrentSubmissionId] = useState(null);
-  const [emailSent, setEmailSent] = useState(false);
+  const [showSuccessOnly, setShowSuccessOnly] = useState(false);
 
   // Fetch user's details and city from localStorage on component mount
   useEffect(() => {
@@ -127,7 +127,7 @@ function FeatureFormPage() {
     setSuccess('');
     setIsEditing(false);
     setCurrentSubmissionId(null);
-    setEmailSent(false);
+    setShowSuccessOnly(false);
   };
 
   const handleEditEmail = () => {
@@ -151,7 +151,7 @@ function FeatureFormPage() {
 
   const handleSendEmail = () => {
     console.log('Sending email to repair stations in', formData.city, ':', emailContent);
-    setEmailSent(true);
+    setShowSuccessOnly(true);
     setShowEmail(false);
     setSuccess('E-post har skickats och vi meddelar dig så snart vi får svar.');
   };
@@ -173,38 +173,38 @@ function FeatureFormPage() {
         </div>
       </div>
 
-      <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
-      <h1 className="page-title">Funktionsformulär</h1>
-
-      {showEmail ? (
-        <EmailPreviewComponent
-          user={user}
-          formData={formData}
-          emailContent={emailContent}
-          errors={errors}
-          success={success}
-          handleReset={handleReset}
-          handleEditEmail={handleEditEmail}
-          handleSendEmail={handleSendEmail}
-        />
+      {showSuccessOnly ? (
+        <SuccessMessageComponent message={success} />
       ) : (
-        <FormComponent
-          cars={cars}
-          formData={formData}
-          errors={errors}
-          success={success}
-          isEditing={isEditing}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleCancelEdit={handleCancelEdit}
-        />
+        <>
+          <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+          {/* <h1 className="page-title">Funktionsformulär</h1> */}
+          {showEmail ? (
+            <EmailPreviewComponent
+              user={user}
+              formData={formData}
+              emailContent={emailContent}
+              errors={errors}
+              success={success}
+              handleReset={handleReset}
+              handleEditEmail={handleEditEmail}
+              handleSendEmail={handleSendEmail}
+            />
+          ) : (
+            <FormComponent
+              cars={cars}
+              formData={formData}
+              errors={errors}
+              success={success}
+              isEditing={isEditing}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              handleCancelEdit={handleCancelEdit}
+            />
+          )}
+          
+        </>
       )}
-
-      <Link to="/home" className="link">
-        Tillbaka till hem
-      </Link>
-
-      {success && !showEmail && <SuccessMessageComponent message={success} />}
     </div>
   );
 }

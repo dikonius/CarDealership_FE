@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function FormComponent({
@@ -76,7 +77,7 @@ function FormComponent({
           )}
         </div>
       </form>
-      <a href="/home" className="link">Tillbaka till hem</a>
+      <Link to="/home" className="link">Tillbaka till hem</Link>
     </>
   );
 }
