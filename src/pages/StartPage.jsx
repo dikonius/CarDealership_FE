@@ -29,7 +29,7 @@ function StartPage() {
             <Link to="/how-it-works" className="how-it-works">Hur funkar det?</Link>
           </div>
         </div>
-        <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+       
         <div className="register-container">
           <p className="welcome-text">Ny användare?</p>
           <Link to="/register" className="welcome-text">Registrera dig!</Link>

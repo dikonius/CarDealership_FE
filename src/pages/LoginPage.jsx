@@ -121,16 +121,17 @@ function LoginPage() {
           <p className="error">{errors.password || '\u00A0'}</p>
         </div>
 
-        <button type="submit" className="button button-secondary">
-          Logga in
-        </button>
+       
 
 
 	  
 
 
-      
-      </form>
+      <button type="submit" className="login-btn">
+          Logga in
+        </button>
+      </form> 
+	  
       <Link to="/register" className="link">Har du inget konto? Registrera dig</Link>
 	  
     </div>

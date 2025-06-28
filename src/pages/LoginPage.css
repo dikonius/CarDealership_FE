@@ -28,6 +28,7 @@
   padding: 1.2rem;
   border-radius: 8px;
   margin-bottom: 6em;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .logo {
@@ -120,12 +121,20 @@ label {
   transition: background-color 0.1s;
 }
 
-.button-secondary {
-  background-color: #75c1f5;
-  color: #000;
+.login-btn {
+  padding: 0.6em;
+  padding-left: 3em;
+  padding-right: 3em;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 6px;
+  background-color:#75c1f5;
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.button-secondary:hover {
+.login-btn:hover {
   background-color: #309dea;
 }
 
