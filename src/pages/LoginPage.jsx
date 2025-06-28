@@ -4,6 +4,7 @@ import { loginSchema } from '../data/loginSchema';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './LoginPage.css';
+import './coversAll.css';
 
 function LoginPage() {
   const [formData, setFormData] = useState({

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './HowItWorksPage.css';
+import './coversAll.css';
 
 function HowItWorksPage() {
   return (

@@ -4,6 +4,7 @@ import { registerSchema } from '../data/registerSchema';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './RegisterPage.css';
+import './coversAll.css';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({

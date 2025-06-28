@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './StartPage.css';
+import './coversAll.css';
 
 function StartPage() {
   const navigate = useNavigate();
