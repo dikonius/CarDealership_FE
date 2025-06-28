@@ -5,7 +5,10 @@ import './StartPage.css';
 
 function StartPage() {
   return (
-    <div className="start-page-container">
+    <div className="page-container">
+		<div className='background-wrapper'>
+			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		</div>
       <div className="start-login-wrapper">
 		 <div className="logo-container">
 				<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
@@ -17,7 +20,7 @@ function StartPage() {
 						
 					</div>
 				</div>
-			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+			
 		
 		 <div className='register-container'>
 			<p className='welcome-text'>Ny användare?</p>

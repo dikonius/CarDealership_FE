@@ -6,6 +6,9 @@ import './MyPages.css';
 function MyPagesPage() {
   return (
     <div className="page-container">
+		<div className='background-wrapper'>
+									<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+								</div>
       <div className="login-wrapper">
         <div className="logo-container">
           <Link to="/home">
@@ -20,13 +23,16 @@ function MyPagesPage() {
           </div>
         </div>
 
-        <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+		<div className='my-page-container'>
+
+        
 
         <h1 className="page-title">Mina sidor</h1>
         <p className="page-text">Se ditt personliga innehåll och inställningar här.</p>
-        <Link to="/home" className="button button-primary">
+        <Link to="/home" className="back-home-btn">
           Tillbaka till hem
         </Link>
+		</div>
       </div>
     </div> 
   );

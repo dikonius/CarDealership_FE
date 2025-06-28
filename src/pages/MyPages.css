@@ -30,3 +30,30 @@
   border-radius: 8px;
   margin-bottom: 10rem;
 }
+.my-page-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.page-text{
+	font-size: 1.5em;
+	margin-bottom: 4em;
+}
+
+.back-home-btn {
+  padding: 0.6em;
+  padding-left: 3em;
+  padding-right: 3em;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 6px;
+  background-color:#75c1f5;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+ 
+}
+
+.back-home-btn:hover {
+  background-color: #309dea;
+}

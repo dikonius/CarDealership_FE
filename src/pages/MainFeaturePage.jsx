@@ -6,6 +6,9 @@ import './MainFeaturePage.css';
 function FeatureFormPage() {
   return (
     <div className="page-container">
+		<div className='background-wrapper'>
+							<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+						</div>
 		<div className="login-wrapper">
 				<div className="logo-container">
 				  <Link to="/home">
@@ -21,14 +24,15 @@ function FeatureFormPage() {
 				</div>
 				</div>
 		
-				<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+				
       <h1 className="page-title">Funktionsformulär</h1>
       <form className="form">
-        <input
-          type="text"
-          placeholder="Ange din information"
-          className="input"
-        />
+        <select className="input">
+    <option value="">Välj ett alternativ</option>
+    <option value="alternativ1">Alternativ 1</option>
+    <option value="alternativ2">Alternativ 2</option>
+    <option value="alternativ3">Alternativ 3</option>
+  </select>
         <textarea
           placeholder="Ytterligare detaljer"
           className="textarea"

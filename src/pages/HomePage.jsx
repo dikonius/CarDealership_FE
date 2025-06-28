@@ -6,7 +6,10 @@ import './HomePage.css';
 function HomePage() {
   return (
     <div className="page-container">
-		<div className="login-wrapper">
+		<div className='background-wrapper'>
+									<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+								</div>
+		<div className="home-login-wrapper">
 				<div className="logo-container">
 						<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
 							<div className='text-container'>
@@ -18,7 +21,7 @@ function HomePage() {
 								
 							</div>
 						</div>
-					<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+					
 				
 				<div className='text-container-right'>
 					<p>Har du problem med din bil?</p>
@@ -41,7 +44,7 @@ function HomePage() {
         to="/feature-form"
         className="button button-tertiary"
       >
-        Ett Knapptryck bort
+        Gå vidare
       </Link>
     </div>
   );

@@ -46,7 +46,7 @@ function LoginPage() {
   return (
     <div className="page-container">
 		<div className="login-wrapper">
-			<div className="logo-container">
+			<div className="login-logo-container">
 				
                   <img src={Logo} alt="Verkstadium logotyp" className="logo" />
                 
