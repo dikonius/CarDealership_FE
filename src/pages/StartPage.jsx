@@ -16,7 +16,10 @@ function StartPage() {
   }, [navigate]);
 
   return (
-    <div className="start-page-container">
+    <div className="page-container">
+		<div className='background-wrapper'>
+			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		</div>
       <div className="start-login-wrapper">
         <div className="logo-container">
           <img src={Logo} alt="Verkstadium logotyp" className="logo" />

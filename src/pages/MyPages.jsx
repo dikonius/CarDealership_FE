@@ -40,6 +40,7 @@ function MyPagesPage() {
         <Link to="/home" className="button button-primary">
           Tillbaka till hem
         </Link>
+		</div>
       </div>
     </div>
   );

@@ -20,14 +20,14 @@
  
 }
 
-.logo-container {
+.login-logo-container {
   display: flex;
   align-items: center;
   gap: 1rem;
   background: linear-gradient(to right, #b7d8f2, #84c0f1);
   padding: 1.2rem;
   border-radius: 8px;
-  margin-bottom: 10rem;
+  margin-bottom: 6em;
 }
 
 .logo {
@@ -65,7 +65,7 @@ form.form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* z-index: 2; */
+  z-index: 2;
 }
 
 .form-group {
