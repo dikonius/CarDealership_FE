@@ -42,7 +42,7 @@ function MyPagesPage() {
         </Link>
 		</div>
       </div>
-    </div>
+    
   );
 }
 
