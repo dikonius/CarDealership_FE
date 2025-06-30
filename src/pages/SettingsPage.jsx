@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerSchema } from '../data/registerSchema';
+import Logo from '../images/Vector1.svg';
+import BigWheel from '../images/Vector.svg';
+import './SettingsPage.css';
+import './coversAll.css';
 
 function SettingsPage() {
     const [formData, setFormData] = useState({
@@ -131,9 +135,23 @@ function SettingsPage() {
     
     return (
         <div className="page-container">
+			<div className='background-wrapper'>
+			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		</div>
+      <div className="start-login-wrapper">
+        <div className="logo-container">
+          <img src={Logo} alt="Verkstadium logotyp" className="logo" />
+          <div className="text-container">
+            <h1>Verkstadium</h1>
+            <p>Vi har koll på verkstäder nära dig!</p>
+            
+          </div>
+        </div>
+		</div>
         <h1 className="page-title">Inställningar</h1>
         {errors.api && <p className="error api-error">{errors.api}</p>}
         <form className="form" onSubmit={handleSubmit}>
+			<div className='form-grid'>
         <div className="form-group">
         <input
         type="text"
@@ -233,6 +251,7 @@ function SettingsPage() {
         />
         <p className="error">{errors.confirmPassword || '\u00A0'}</p>
         </div>
+		</div>
         <div className="button-group">
         <button type="submit" className="button button-primary">
         Spara

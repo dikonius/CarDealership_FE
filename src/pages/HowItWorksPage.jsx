@@ -2,10 +2,14 @@ import { Link } from 'react-router-dom';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './HowItWorksPage.css';
+import './coversAll.css';
 
 function HowItWorksPage() {
   return (
     <div className="page-container">
+		<div className='background-wrapper'>
+											<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+										</div>
       <div className="login-wrapper">
 		 <div className="logo-container">
 				<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
@@ -18,7 +22,7 @@ function HowItWorksPage() {
 					</div>
 					
 				</div>
-			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+			
 
 	<div className='text-box'>
 						<h1>Hur funkar Verkstadium?</h1>
@@ -38,7 +42,7 @@ function HowItWorksPage() {
 		 </div> 
 
 		 
-      <Link to="/" className="button button-primary">Tillbaka</Link>
+      <Link to="/" className="go-back-btn">Tillbaka</Link>
     </div>
   );
 }

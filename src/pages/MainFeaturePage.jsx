@@ -7,6 +7,7 @@ import SuccessMessageComponent from '../components/SuccessMessageComponent';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './MainFeaturePage.css';
+import './coversAll.css';
 
 function FeatureFormPage() {
   const { cars } = useCars();
