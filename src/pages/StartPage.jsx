@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './StartPage.css';
+import './coversAll.css';
 
 function StartPage() {
   const navigate = useNavigate();
@@ -16,7 +17,10 @@ function StartPage() {
   }, [navigate]);
 
   return (
-    <div className="start-page-container">
+    <div className="page-container">
+		<div className='background-wrapper'>
+			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		</div>
       <div className="start-login-wrapper">
         <div className="logo-container">
           <img src={Logo} alt="Verkstadium logotyp" className="logo" />
@@ -26,7 +30,7 @@ function StartPage() {
             <Link to="/how-it-works" className="how-it-works">Hur funkar det?</Link>
           </div>
         </div>
-        <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+       
         <div className="register-container">
           <p className="welcome-text">Ny användare?</p>
           <Link to="/register" className="welcome-text">Registrera dig!</Link>

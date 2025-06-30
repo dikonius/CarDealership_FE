@@ -4,6 +4,7 @@ import { registerSchema } from '../data/registerSchema';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './RegisterPage.css';
+import './coversAll.css';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -64,16 +65,22 @@ function RegisterPage() {
 
   return (
     <div className="page-container">
-      <div className="login-wrapper">
-        <div className="logo-container">
-          <img src={Logo} alt="Verkstadium logotyp" className="logo"/>
-          <div className='text-container'>
-            <h1>Verkstadium</h1>
-            <p>Vi har koll på verkstäder nära dig!</p>
-          </div>
-        </div>
-      </div>
-      <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		<div className='background-wrapper'>
+					<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+				</div>
+		<div className="login-wrapper">
+		<div className="register-logo-container">
+						<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
+							<div className='text-container'>
+								<h1>Verkstadium</h1>
+								<p>Vi har koll på verkstäder nära dig!</p>
+								
+			  
+								
+							</div>
+						</div>
+						</div>
+						
       <h1 className="page-title">Registrera ett konto!</h1>
       {errors.api && <p className="error api-error">{errors.api}</p>}
       <form className="form" onSubmit={handleSubmit}>

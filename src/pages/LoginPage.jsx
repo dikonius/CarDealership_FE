@@ -4,6 +4,7 @@ import { loginSchema } from '../data/loginSchema';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './LoginPage.css';
+import './coversAll.css';
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -58,16 +59,22 @@ function LoginPage() {
 
   return (
     <div className="page-container">
-      <div className="login-wrapper">
-        <div className="logo-container">
-          <img src={Logo} alt="Verkstadium logotyp" className="logo" />
-          <div className='text-container'>
-            <h1>Verkstadium</h1>
-            <p>Vi har koll på verkstäder nära dig!</p>
-          </div>
-        </div>
-      </div>
-      <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		<div className="login-wrapper">
+			<div className="login-logo-container">
+				
+                  <img src={Logo} alt="Verkstadium logotyp" className="logo" />
+                
+				<div className='text-container'>
+					<h1>Verkstadium</h1>
+					<p>Vi har koll på verkstäder nära dig!</p>
+
+					
+				</div>
+				</div>
+			</div>
+			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		
+      
       {state?.success && <p className="success">{state.success}</p>}
       {errors.api && <p className="error api-error">{errors.api}</p>}
       <form className="form" onSubmit={handleSubmit}>
@@ -97,10 +104,18 @@ function LoginPage() {
           />
           <p className="error">{errors.password || '\u00A0'}</p>
         </div>
-        <button type="submit" className="button button-secondary">
+
+       
+
+
+	  
+
+
+      <button type="submit" className="login-btn">
           Logga in
         </button>
-      </form>
+      </form> 
+	  
       <Link to="/register" className="link">Har du inget konto? Registrera dig</Link>
     </div>
   );

@@ -13,6 +13,7 @@ import MyPagesPage from './pages/MyPages.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
 import CarsPage from './pages/CarsPage.jsx';
 
+
 const router = createHashRouter([
   {
     path: '/',

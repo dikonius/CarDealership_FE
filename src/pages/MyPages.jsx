@@ -2,6 +2,7 @@ import { useLocation, Link } from 'react-router-dom';
 import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './MyPages.css';
+import './coversAll.css';
 
 function MyPagesPage() {
   const { state } = useLocation();
@@ -9,6 +10,9 @@ function MyPagesPage() {
   return (
     <div className="page-container">
       {/* Header / Branding */}
+	  <div className='background-wrapper'>
+				<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+			</div>
       <div className="login-wrapper">
         <div className="logo-container">
           <Link to="/home">
@@ -22,7 +26,7 @@ function MyPagesPage() {
             </Link>
           </div>
         </div>
-        <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel" />
+        
       </div>
 
       {/* Main Content */}
@@ -31,17 +35,19 @@ function MyPagesPage() {
       <p className="page-text">Se ditt personliga innehåll och inställningar här.</p>
 
       <div className="button-group">
-        <Link to="/my-pages/settings" className="button button-secondary">
+        <Link to="/my-pages/settings" className="settings-btn">
           Inställningar
         </Link>
-        <Link to="/my-pages/cars" className="button button-tertiary">
+        <Link to="/my-pages/cars" className="myCar-btn">
           Mina bilar
         </Link>
-        <Link to="/home" className="button button-primary">
+        
+		</div>
+		<Link to="/home" className="back-home-btn">
           Tillbaka till hem
         </Link>
       </div>
-    </div>
+    
   );
 }
 
