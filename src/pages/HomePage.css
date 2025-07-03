@@ -22,7 +22,7 @@
 
 
 
-.logo-container {
+.home-logo-container {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -30,6 +30,7 @@
   padding: 1.2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 2.5em;
  
 
 }

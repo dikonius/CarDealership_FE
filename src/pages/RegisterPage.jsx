@@ -20,7 +20,6 @@ function RegisterPage() {
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const API = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,18 +40,28 @@ function RegisterPage() {
       return;
     }
 
-    // 2) call your API
+    // 2) store user data in Local Storage
     try {
-      const resp = await fetch(`${API}/api/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await resp.json();
-      if (!resp.ok) {
-        setErrors(data.errors || { api: data.error || 'Registrering misslyckades.' });
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const userExists = users.some((u) => u.email === formData.email);
+
+      if (userExists) {
+        setErrors({ api: 'E-postadressen är redan registrerad.' });
         return;
       }
+
+      users.push({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        mobile: formData.mobile,
+        address: formData.address,
+        postcode: formData.postcode,
+        city: formData.city,
+        password: formData.password,
+      });
+
+      localStorage.setItem('users', JSON.stringify(users));
 
       // 3) on success, redirect to login
       navigate('/login', {
@@ -65,22 +74,18 @@ function RegisterPage() {
 
   return (
     <div className="page-container">
-		<div className='background-wrapper'>
-					<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
-				</div>
-		<div className="login-wrapper">
-		<div className="register-logo-container">
-						<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
-							<div className='text-container'>
-								<h1>Verkstadium</h1>
-								<p>Vi har koll på verkstäder nära dig!</p>
-								
-			  
-								
-							</div>
-						</div>
-						</div>
-						
+      <div className='background-wrapper'>
+        <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+      </div>
+      <div className="login-wrapper">
+        <div className="register-logo-container">
+          <img src={Logo} alt="Verkstadium logotyp" className="logo"/>
+          <div className='text-container'>
+            <h1>Verkstadium</h1>
+            <p>Vi har koll på verkstäder nära dig!</p>
+          </div>
+        </div>
+      </div>
       <h1 className="page-title">Registrera ett konto!</h1>
       {errors.api && <p className="error api-error">{errors.api}</p>}
       <form className="form" onSubmit={handleSubmit}>

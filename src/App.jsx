@@ -8,50 +8,32 @@ function App() {
   
   return (
     <div className="app-container">
-    <nav className="nav-bar" role="navigation" aria-label="Huvudnavigering">
-    <ul className="nav-list">
-    {isAuthenticated() ? (
+    {/* <nav className="nav-bar" role="navigation" aria-label="Huvudnavigering">
+  <ul className="nav-list">
+    {!isAuthenticated() && (
       <>
-      <li>
-      <Link
-      to="/home"
-      className="nav-link"
-      aria-current={location.pathname === '/home' ? 'page' : undefined}
-      >
-      Hem
-      </Link>
-      </li>
-      <li>
-      <DropdownMenu currentPath={location.pathname} />
-      </li>
-      <li>
-      <LogoutButton />
-      </li>
-      </>
-    ) : (
-      <>
-      <li>
-      <Link
-      to="/"
-      className="nav-link"
-      aria-current={location.pathname === '/' ? 'page' : undefined}
-      >
-      Startsida
-      </Link>
-      </li>
-      <li>
-      <Link
-      to="/how-it-works"
-      className="nav-link"
-      aria-current={location.pathname === '/how-it-works' ? 'page' : undefined}
-      >
-      Hur funkar det?
-      </Link>
-      </li>
+        <li>
+          <Link
+            to="/"
+            className="nav-link"
+            aria-current={location.pathname === '/' ? 'page' : undefined}
+          >
+            Startsida
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/how-it-works"
+            className="nav-link"
+            aria-current={location.pathname === '/how-it-works' ? 'page' : undefined}
+          >
+            Hur funkar det?
+          </Link>
+        </li>
       </>
     )}
-    </ul>
-    </nav>
+  </ul>
+</nav> */}
     <main className="main-content">
     <Outlet />
     </main>

@@ -28,7 +28,7 @@
   background: linear-gradient(to right, #b7d8f2, #84c0f1);
   padding: 1.2rem;
   border-radius: 8px;
-  margin-bottom: 10rem;
+  margin-bottom: 3em;
 }
 .my-page-container{
 	display: flex;
@@ -56,7 +56,20 @@
   width: 40em;
   opacity: 0.4;
 }
-
+.logout-btn {
+	 padding: 0.6em;
+  padding-left: 3em;
+  padding-right: 3em;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 6px;
+  background-color:#75c1f5;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  color: black;
+  margin-top: 2em;
+}
 .back-home-btn {
   padding: 0.6em;
   padding-left: 3em;
