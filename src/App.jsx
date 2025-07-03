@@ -8,7 +8,7 @@ function App() {
   
   return (
     <div className="app-container">
-    <nav className="nav-bar" role="navigation" aria-label="Huvudnavigering">
+    {/* <nav className="nav-bar" role="navigation" aria-label="Huvudnavigering">
   <ul className="nav-list">
     {!isAuthenticated() && (
       <>
@@ -33,7 +33,7 @@ function App() {
       </>
     )}
   </ul>
-</nav>
+</nav> */}
     <main className="main-content">
     <Outlet />
     </main>
