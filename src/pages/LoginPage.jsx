@@ -23,7 +23,7 @@ function LoginPage() {
     e.preventDefault();
     setErrors({});
 
-    // 1) client-side validation
+    // 1) Client-side validation
     const { error } = loginSchema.validate(formData, { abortEarly: false });
     if (error) {
       const fieldErrors = {};
@@ -34,7 +34,7 @@ function LoginPage() {
       return;
     }
 
-    // 2) check credentials against Local Storage
+    // 2) Check credentials against Local Storage
     try {
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find(
@@ -46,11 +46,13 @@ function LoginPage() {
         return;
       }
 
-      // 3) store a mock JWT (simple token for demo purposes)
-      localStorage.setItem('userToken', `mock-token-${formData.email}`);
-      // 4) redirect to home
+      // 3) Store a base64-encoded JWT-like token
+      const token = btoa(JSON.stringify({ email: formData.email }));
+      localStorage.setItem('userToken', token);
+      // 4) Redirect to home
       navigate('/home');
-    } catch {
+    } catch (err) {
+      console.error('Login error:', err.message);
       setErrors({ api: 'Kunde inte logga in. Försök igen senare.' });
     }
   };

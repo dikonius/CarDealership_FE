@@ -13,12 +13,15 @@ function useCars() {
     // Load user cars on mount
     useEffect(() => {
         const token = localStorage.getItem('userToken');
+        console.log('useEffect Token:', token);
         if (!token) {
+            setErrors({ api: 'Ingen token hittades. Logga in.' });
             navigate('/login');
             return;
         }
         try {
             const decoded = JSON.parse(atob(token));
+            console.log('useEffect Decoded token:', decoded);
             const users = JSON.parse(localStorage.getItem('users') || '[]');
             const user = users.find((u) => u.email === decoded.email);
             if (user) {
@@ -26,44 +29,71 @@ function useCars() {
             } else {
                 setErrors({ api: 'Användaren hittades inte.' });
             }
-        } catch {
+        } catch (err) {
+            console.error('useEffect decode error:', err.message);
             setErrors({ api: 'Kunde inte ladda användardata.' });
+            navigate('/login');
         }
     }, [navigate]);
     
     const saveCar = ({ formData, errors }) => {
+        console.log('saveCar called with:', { formData, errors });
         if (errors) {
+            console.log('Validation errors:', errors);
             setErrors(errors);
             return;
         }
         
-        // *** START: Local Storage Implementation ***
         try {
             const token = localStorage.getItem('userToken');
-            const decoded = JSON.parse(atob(token));
+            console.log('Token:', token);
+            if (!token) {
+                setErrors({ api: 'Ingen giltig token hittades. Logga in igen.' });
+                navigate('/login');
+                return;
+            }
+            
+            let decoded;
+            try {
+                decoded = JSON.parse(atob(token));
+                console.log('Decoded token:', decoded);
+                if (!decoded.email) {
+                    console.error('Token missing email field:', decoded);
+                    setErrors({ api: 'Ogiltig token. Inget email-fält.' });
+                    navigate('/login');
+                    return;
+                }
+            } catch (err) {
+                console.error('Token decode error:', err.message);
+                setErrors({ api: 'Ogiltig token. Logga in igen.' });
+                navigate('/login');
+                return;
+            }
+            
             const users = JSON.parse(localStorage.getItem('users') || '[]');
+            console.log('Users:', users);
             const userIndex = users.findIndex((u) => u.email === decoded.email);
             if (userIndex === -1) {
+                console.error('User not found:', decoded.email);
                 setErrors({ api: 'Användaren hittades inte.' });
                 return;
             }
             
             let updatedCars = users[userIndex].cars || [];
+            console.log('Current cars:', updatedCars);
             if (editId) {
-                // Edit existing car
                 updatedCars = updatedCars.map((car) =>
                     car.id === editId ? { ...car, ...formData } : car
             );
             setSuccess('Bil uppdaterad!');
             setEditId(null);
         } else {
-            // Add new car
             if (updatedCars.some((car) => car.regNumber === formData.regNumber)) {
                 setErrors({ regNumber: 'Registreringsnummer finns redan.' });
                 return;
             }
             updatedCars.push({
-                id: Date.now().toString(), // Simple unique ID
+                id: Date.now().toString(),
                 brand: formData.brand,
                 regNumber: formData.regNumber,
             });
@@ -71,44 +101,21 @@ function useCars() {
         }
         
         users[userIndex] = { ...users[userIndex], cars: updatedCars };
-        localStorage.setItem('users', JSON.stringify(users));
+        try {
+            localStorage.setItem('users', JSON.stringify(users));
+            console.log('Saved to localStorage:', users);
+        } catch (err) {
+            console.error('localStorage write error:', err.message);
+            setErrors({ api: 'Kunde inte skriva till localStorage. Kontrollera lagringsutrymme.' });
+            return;
+        }
+        
         setCars(updatedCars);
         setFormData({ brand: '', regNumber: '' });
-    } catch {
+    } catch (err) {
+        console.error('Error in saveCar:', err.message);
         setErrors({ api: 'Kunde inte spara bilen. Försök igen.' });
     }
-    // *** END: Local Storage Implementation ***
-    
-    // *** REPLACE WITH API CALL IN FUTURE ***
-    /*
-    try {
-    const token = localStorage.getItem('userToken');
-    const url = editId ? `/api/cars/${editId}` : '/api/cars';
-    const method = editId ? 'PUT' : 'POST';
-    const response = await fetch(url, {
-    method,
-    headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-    },
-    body: JSON.stringify(formData),
-    });
-    const data = await response.json();
-    if (!response.ok) {
-    throw new Error(JSON.stringify(data.error || { api: 'Kunde inte spara bilen.' }));
-    }
-    const updatedCars = editId
-    ? cars.map((car) => (car.id === editId ? { ...car, ...data } : car))
-    : [...cars, { id: data.id, ...formData }];
-    setCars(updatedCars);
-    setFormData({ brand: '', regNumber: '' });
-    setEditId(null);
-    setSuccess(editId ? 'Bil uppdaterad!' : 'Bil tillagd!');
-    } catch (err) {
-    const errorObj = JSON.parse(err.message);
-    setErrors(errorObj);
-    }
-    */
 };
 
 const editCar = (car) => {
@@ -119,45 +126,51 @@ const editCar = (car) => {
 };
 
 const deleteCar = (id) => {
-    // *** START: Local Storage Implementation ***
     try {
         const token = localStorage.getItem('userToken');
-        const decoded = JSON.parse(atob(token));
+        console.log('deleteCar Token:', token);
+        if (!token) {
+            setErrors({ api: 'Ingen giltig token hittades. Logga in igen.' });
+            navigate('/login');
+            return;
+        }
+        
+        let decoded;
+        try {
+            decoded = JSON.parse(atob(token));
+            console.log('deleteCar Decoded token:', decoded);
+        } catch (err) {
+            console.error('deleteCar decode error:', err.message);
+            setErrors({ api: 'Ogiltig token. Logga in igen.' });
+            navigate('/login');
+            return;
+        }
+        
         const users = JSON.parse(localStorage.getItem('users') || '[]');
         const userIndex = users.findIndex((u) => u.email === decoded.email);
         if (userIndex === -1) {
+            console.error('User not found:', decoded.email);
             setErrors({ api: 'Användaren hittades inte.' });
             return;
         }
         
         const updatedCars = users[userIndex].cars.filter((car) => car.id !== id);
         users[userIndex] = { ...users[userIndex], cars: updatedCars };
-        localStorage.setItem('users', JSON.stringify(users));
+        try {
+            localStorage.setItem('users', JSON.stringify(users));
+            console.log('deleteCar Saved to localStorage:', users);
+        } catch (err) {
+            console.error('deleteCar localStorage write error:', err.message);
+            setErrors({ api: 'Kunde inte radera bilen. Försök igen.' });
+            return;
+        }
+        
         setCars(updatedCars);
         setSuccess('Bil raderad!');
-    } catch {
+    } catch (err) {
+        console.error('Error in deleteCar:', err.message);
         setErrors({ api: 'Kunde inte radera bilen. Försök igen.' });
     }
-    // *** END: Local Storage Implementation ***
-    
-    // *** REPLACE WITH API CALL IN FUTURE ***
-    /*
-    try {
-    const token = localStorage.getItem('userToken');
-    const response = await fetch(`/api/cars/${id}`, {
-    method: 'DELETE',
-    headers: { 'Authorization': `Bearer ${token}` },
-    });
-    if (!response.ok) {
-    throw new Error(JSON.stringify({ api: 'Kunde inte radera bilen.' }));
-    }
-    setCars(cars.filter((car) => car.id !== id));
-    setSuccess('Bil raderad!');
-    } catch (err) {
-    const errorObj = JSON.parse(err.message);
-    setErrors(errorObj);
-    }
-    */
 };
 
 return {

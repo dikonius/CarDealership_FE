@@ -8,6 +8,7 @@ import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './MainFeaturePage.css';
 import './coversAll.css';
+import LogoutButton from '../components/LogoutButton';
 
 function FeatureFormPage() {
   const { cars } = useCars();
@@ -170,6 +171,7 @@ function FeatureFormPage() {
             <Link to="/how-it-works" className="how-it-works">
               Hur funkar det?
             </Link>
+            <LogoutButton />
           </div>
         </div>
       </div>

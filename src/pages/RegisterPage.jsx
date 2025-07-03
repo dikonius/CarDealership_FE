@@ -29,7 +29,7 @@ function RegisterPage() {
     e.preventDefault();
     setErrors({});
 
-    // 1) client-side Joi validation
+    // 1) Client-side Joi validation
     const { error } = registerSchema.validate(formData, { abortEarly: false });
     if (error) {
       const fieldErrors = {};
@@ -40,7 +40,7 @@ function RegisterPage() {
       return;
     }
 
-    // 2) store user data in Local Storage
+    // 2) Store user data in Local Storage
     try {
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const userExists = users.some((u) => u.email === formData.email);
@@ -59,15 +59,19 @@ function RegisterPage() {
         postcode: formData.postcode,
         city: formData.city,
         password: formData.password,
+        cars: [], // Initialize cars array
       });
 
       localStorage.setItem('users', JSON.stringify(users));
 
-      // 3) on success, redirect to login
-      navigate('/login', {
-        state: { success: 'Registreringen lyckades! Logga in för att fortsätta.' }
+      // 3) Set userToken and redirect to home
+      const token = btoa(JSON.stringify({ email: formData.email }));
+      localStorage.setItem('userToken', token);
+      navigate('/home', {
+        state: { success: 'Registreringen lyckades! Välkommen!' }
       });
-    } catch {
+    } catch (err) {
+      console.error('Registration error:', err.message);
       setErrors({ api: 'Kunde inte registrera. Försök igen senare.' });
     }
   };

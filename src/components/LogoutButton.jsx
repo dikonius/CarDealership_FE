@@ -16,7 +16,7 @@ function LogoutButton() {
     
     return (
         <span
-        className="nav-link"
+        className="my-pages"
         onClick={handleLogout}
         style={{ cursor: 'pointer' }}
         role="button"

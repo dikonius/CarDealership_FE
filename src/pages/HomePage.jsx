@@ -3,6 +3,7 @@ import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './HomePage.css';
 import './coversAll.css';
+import LogoutButton from '../components/LogoutButton';
 
 function HomePage() {
   return (
@@ -18,6 +19,7 @@ function HomePage() {
 								<p>Vi har koll på verkstäder nära dig!</p>
 								<Link to="/how-it-works" className='how-it-works'>Hur funkar det?</Link>
 								<Link to="/my-pages" className='my-pages'>Mina sidor</Link>
+								<LogoutButton/>
 			  
 								
 							</div>
