@@ -11,7 +11,7 @@ function HomePage() {
 									<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
 								</div>
 		<div className="home-login-wrapper">
-				<div className="logo-container">
+				<div className="home-logo-container">
 						<img src={Logo} alt="Verkstadium logotyp" className="logo"/>
 							<div className='text-container'>
 								<h1>Verkstadium</h1>
@@ -31,7 +31,7 @@ function HomePage() {
 				<div className='text-container-left'>
 					<p>Ingen fara!</p> 
 					
-					<p>Skriv ner problemen här hos oss, vi löser en nära verkstad till billigast pris innom kort.</p>
+					<p>Skriv ner problemen här hos oss, vi löser en nära verkstad till billigast pris inom kort.</p>
 					</div>
 
 				</div>

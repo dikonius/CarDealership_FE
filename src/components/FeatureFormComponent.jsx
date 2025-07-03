@@ -77,7 +77,7 @@ function FormComponent({
           )}
         </div>
       </form>
-      <Link to="/home" className="link">Tillbaka till hem</Link>
+      <Link to="/home" className="back-home-btn">Tillbaka till hem</Link>
     </>
   );
 }

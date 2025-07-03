@@ -3,6 +3,7 @@ import Logo from '../images/Vector1.svg';
 import BigWheel from '../images/Vector.svg';
 import './MyPages.css';
 import './coversAll.css';
+import LogoutButton from '../components/LogoutButton';
 
 function MyPagesPage() {
   const { state } = useLocation();
@@ -44,8 +45,11 @@ function MyPagesPage() {
         
 		</div>
 		<Link to="/home" className="back-home-btn">
-          Tillbaka till hem
-        </Link>
+  Tillbaka till hem
+</Link>
+<div className="logout-btn">
+  <LogoutButton />
+</div>
       </div>
     
   );
