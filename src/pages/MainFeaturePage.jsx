@@ -29,25 +29,26 @@ function FeatureFormPage() {
 
   // Fetch user's details and city from localStorage on component mount
   useEffect(() => {
-    const token = localStorage.getItem('userToken');
-    if (!token) {
-      navigate('/login');
-      return;
+  const token = localStorage.getItem('userToken');
+  if (!token) {
+    navigate('/login');
+    return;
+  }
+  try {
+    // Extract email from token (e.g., 'mock-token-user@example.com' -> 'user@example.com')
+    const email = token.replace('mock-token-', '');
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const currentUser = users.find((u) => u.email === email);
+    if (currentUser) {
+      setUser(currentUser);
+      setFormData((prev) => ({ ...prev, city: currentUser.city }));
+    } else {
+      setErrors({ api: 'Användaren hittades inte.' });
     }
-    try {
-      const decoded = JSON.parse(atob(token));
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const currentUser = users.find((u) => u.email === decoded.email);
-      if (currentUser) {
-        setUser(currentUser);
-        setFormData((prev) => ({ ...prev, city: currentUser.city }));
-      } else {
-        setErrors({ api: 'Användaren hittades inte.' });
-      }
-    } catch {
-      setErrors({ api: 'Kunde inte ladda användardata.' });
-    }
-  }, [navigate]);
+  } catch {
+    setErrors({ api: 'Kunde inte ladda användardata.' });
+  }
+}, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
