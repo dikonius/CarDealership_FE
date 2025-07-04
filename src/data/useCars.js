@@ -37,12 +37,18 @@ function useCars() {
             return;
         }
         
-        // *** START: Local Storage Implementation ***
         try {
             const token = localStorage.getItem('userToken');
-            const decoded = JSON.parse(atob(token));
+            if (!token) {
+                setErrors({ api: 'Ingen användare är inloggad.' });
+                return;
+            }
+            
+            // Extract email from token (e.g., 'mock-token-user@example.com' -> 'user@example.com')
+            const email = token.replace('mock-token-', '');
             const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userIndex = users.findIndex((u) => u.email === decoded.email);
+            const userIndex = users.findIndex((u) => u.email === email);
+            
             if (userIndex === -1) {
                 setErrors({ api: 'Användaren hittades inte.' });
                 return;
@@ -77,38 +83,6 @@ function useCars() {
     } catch {
         setErrors({ api: 'Kunde inte spara bilen. Försök igen.' });
     }
-    // *** END: Local Storage Implementation ***
-    
-    // *** REPLACE WITH API CALL IN FUTURE ***
-    /*
-    try {
-    const token = localStorage.getItem('userToken');
-    const url = editId ? `/api/cars/${editId}` : '/api/cars';
-    const method = editId ? 'PUT' : 'POST';
-    const response = await fetch(url, {
-    method,
-    headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-    },
-    body: JSON.stringify(formData),
-    });
-    const data = await response.json();
-    if (!response.ok) {
-    throw new Error(JSON.stringify(data.error || { api: 'Kunde inte spara bilen.' }));
-    }
-    const updatedCars = editId
-    ? cars.map((car) => (car.id === editId ? { ...car, ...data } : car))
-    : [...cars, { id: data.id, ...formData }];
-    setCars(updatedCars);
-    setFormData({ brand: '', regNumber: '' });
-    setEditId(null);
-    setSuccess(editId ? 'Bil uppdaterad!' : 'Bil tillagd!');
-    } catch (err) {
-    const errorObj = JSON.parse(err.message);
-    setErrors(errorObj);
-    }
-    */
 };
 
 const editCar = (car) => {

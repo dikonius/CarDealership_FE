@@ -35,24 +35,26 @@ function LoginPage() {
     }
 
     // 2) check credentials against Local Storage
-    try {
-      const users = JSON.parse(localStorage.getItem('users')) || [];
-      const user = users.find(
-        (u) => u.email === formData.email && u.password === formData.password
-      );
+    // In LoginPage.jsx, inside handleSubmit
+try {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(
+    (u) => u.email === formData.email && u.password === formData.password
+  );
 
-      if (!user) {
-        setErrors({ api: 'Fel e-post eller lösenord.' });
-        return;
-      }
+  if (!user) {
+    setErrors({ api: 'Fel e-post eller lösenord.' });
+    return;
+  }
 
-      // 3) store a mock JWT (simple token for demo purposes)
-      localStorage.setItem('userToken', `mock-token-${formData.email}`);
-      // 4) redirect to home
-      navigate('/home');
-    } catch {
-      setErrors({ api: 'Kunde inte logga in. Försök igen senare.' });
-    }
+  // Create a base64-encoded JSON token
+  const tokenPayload = { email: formData.email };
+  const token = btoa(JSON.stringify(tokenPayload));
+  localStorage.setItem('userToken', token);
+  navigate('/home');
+} catch {
+  setErrors({ api: 'Kunde inte logga in. Försök igen senare.' });
+}
   };
 
   return (
