@@ -14,6 +14,7 @@ function LoginPage() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const { state } = useLocation();
+  const API = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,7 +24,7 @@ function LoginPage() {
     e.preventDefault();
     setErrors({});
 
-    // 1) Client-side validation
+    // 1) client-side validation
     const { error } = loginSchema.validate(formData, { abortEarly: false });
     if (error) {
       const fieldErrors = {};
@@ -34,41 +35,46 @@ function LoginPage() {
       return;
     }
 
-    // 2) Check credentials against Local Storage
+    // 2) call your API
     try {
-      const users = JSON.parse(localStorage.getItem('users')) || [];
-      const user = users.find(
-        (u) => u.email === formData.email && u.password === formData.password
-      );
-
-      if (!user) {
-        setErrors({ api: 'Fel e-post eller lösenord.' });
+      const resp = await fetch(`${API}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        setErrors({ api: data.error || 'Fel e-post eller lösenord.' });
         return;
       }
 
-      // 3) Store a base64-encoded JWT-like token
-      const token = btoa(JSON.stringify({ email: formData.email }));
-      localStorage.setItem('userToken', token);
-      // 4) Redirect to home
+      // 3) store the JWT
+      localStorage.setItem('userToken', data.token);
+      // 4) redirect to home
       navigate('/home');
-    } catch (err) {
-      console.error('Login error:', err.message);
+    } catch {
       setErrors({ api: 'Kunde inte logga in. Försök igen senare.' });
     }
   };
 
   return (
     <div className="page-container">
-      <div className="login-wrapper">
-        <div className="login-logo-container">
-          <img src={Logo} alt="Verkstadium logotyp" className="logo" />
-          <div className='text-container'>
-            <h1>Verkstadium</h1>
-            <p>Vi har koll på verkstäder nära dig!</p>
-          </div>
-        </div>
-      </div>
-      <img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		<div className="login-wrapper">
+			<div className="login-logo-container">
+				
+                  <img src={Logo} alt="Verkstadium logotyp" className="logo" />
+                
+				<div className='text-container'>
+					<h1>Verkstadium</h1>
+					<p>Vi har koll på verkstäder nära dig!</p>
+
+					
+				</div>
+				</div>
+			</div>
+			<img src={BigWheel} alt="bakgrunds-dekoration" className="background-wheel"/>
+		
+      
       {state?.success && <p className="success">{state.success}</p>}
       {errors.api && <p className="error api-error">{errors.api}</p>}
       <form className="form" onSubmit={handleSubmit}>
@@ -98,10 +104,18 @@ function LoginPage() {
           />
           <p className="error">{errors.password || '\u00A0'}</p>
         </div>
-        <button type="submit" className="login-btn">
+
+       
+
+
+	  
+
+
+      <button type="submit" className="login-btn">
           Logga in
         </button>
       </form> 
+	  
       <Link to="/register" className="link">Har du inget konto? Registrera dig</Link>
     </div>
   );
