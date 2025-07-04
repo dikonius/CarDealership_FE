@@ -37,7 +37,7 @@ function LoginPage() {
 
     // 2) call your API
     try {
-      const resp = await fetch(`${API}/api/auth/login`, {
+      const resp = await fetch(`${API}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
