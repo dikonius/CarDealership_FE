@@ -1,5 +1,6 @@
 import CarForm from '../components/CarForm';
 import CarList from '../components/CarList';
+import LogoutButton from '../components/LogoutButton';
 import useCars from '../data/useCars';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -22,6 +23,9 @@ function CarsPage() {
         <Link to="/home" className="back-home-btn">
         Tillbaka till hem
         </Link>
+        <div className="logout-btn">
+        <LogoutButton />
+        </div>
         </div>
         
     );
