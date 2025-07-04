@@ -1,124 +1,131 @@
+// useCars.js
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { carSchema } from '../data/carSchema';
 
 function useCars() {
-  const [formData, setFormData] = useState({ brand: '', regNumber: '' });
-  const [cars, setCars] = useState([]);
-  const [editId, setEditId] = useState(null);
-  const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
-
-  // Load user cars on mount
-  useEffect(() => {
-    const token = localStorage.getItem('userToken');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-    try {
-      const email = token.replace('mock-token-', '');
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find((u) => u.email === email);
-      if (user) {
-        setCars(user.cars || []);
-        console.log('Loaded cars:', user.cars || []); // Debug log
-      } else {
-        setErrors({ api: 'Användaren hittades inte.' });
-      }
-    } catch {
-      setErrors({ api: 'Kunde inte ladda användardata.' });
-    }
-  }, [navigate]);
-
-  const saveCar = ({ formData, errors }) => {
-    if (errors) {
-      setErrors(errors);
-      return;
-    }
-
-    try {
-      const token = localStorage.getItem('userToken');
-      if (!token) {
-        setErrors({ api: 'Ingen användare är inloggad.' });
-        return;
-      }
-
-      const email = token.replace('mock-token-', '');
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const userIndex = users.findIndex((u) => u.email === email);
-
-      if (userIndex === -1) {
-        setErrors({ api: 'Användaren hittades inte.' });
-        return;
-      }
-
-      let updatedCars = users[userIndex].cars || [];
-      if (editId) {
-        updatedCars = updatedCars.map((car) =>
-          car.id === editId ? { ...car, ...formData } : car
-        );
-        setSuccess('Bil uppdaterad!');
-        setEditId(null);
-      } else {
-        if (updatedCars.some((car) => car.regNumber === formData.regNumber)) {
-          setErrors({ regNumber: 'Registreringsnummer finns redan.' });
-          return;
+    const [formData, setFormData] = useState({ brand: '', regNumber: '' });
+    const [cars, setCars] = useState([]);
+    const [editId, setEditId] = useState(null);
+    const [errors, setErrors] = useState({});
+    const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
+    
+    // Load user cars on mount
+    useEffect(() => {
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            navigate('/login');
+            return;
         }
-        updatedCars.push({
-          id: Date.now().toString(),
-          brand: formData.brand,
-          regNumber: formData.regNumber,
-        });
-        setSuccess('Bil tillagd!');
-      }
-
-      users[userIndex] = { ...users[userIndex], cars: updatedCars };
-      localStorage.setItem('users', JSON.stringify(users));
-      setCars(updatedCars);
-      setFormData({ brand: '', regNumber: '' });
-      console.log('Saved cars:', updatedCars); // Debug log
+        try {
+            // Decode base64 token and parse JSON
+            const decodedToken = JSON.parse(atob(token));
+            const email = decodedToken.email;
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find((u) => u.email === email);
+            if (user) {
+                setCars(user.cars || []);
+                console.log('Loaded cars:', user.cars || []);
+            } else {
+                setErrors({ api: 'Användaren hittades inte.' });
+            }
+        } catch {
+            setErrors({ api: 'Kunde inte ladda användardata.' });
+        }
+    }, [navigate]);
+    
+    const saveCar = ({ formData, errors }) => {
+        if (errors) {
+            setErrors(errors);
+            return;
+        }
+        
+        try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                setErrors({ api: 'Ingen användare är inloggad.' });
+                return;
+            }
+            
+            // Decode base64 token and parse JSON
+            const decodedToken = JSON.parse(atob(token));
+            const email = decodedToken.email;
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex((u) => u.email === email);
+            
+            if (userIndex === -1) {
+                setErrors({ api: 'Användaren hittades inte.' });
+                return;
+            }
+            
+            let updatedCars = users[userIndex].cars || [];
+            if (editId) {
+                updatedCars = updatedCars.map((car) =>
+                    car.id === editId ? { ...car, ...formData } : car
+            );
+            setSuccess('Bil uppdaterad!');
+            setEditId(null);
+        } else {
+            if (updatedCars.some((car) => car.regNumber === formData.regNumber)) {
+                setErrors({ regNumber: 'Registreringsnummer finns redan.' });
+                return;
+            }
+            updatedCars.push({
+                id: Date.now().toString(),
+                brand: formData.brand,
+                regNumber: formData.regNumber,
+            });
+            setSuccess('Bil tillagd!');
+        }
+        
+        users[userIndex] = { ...users[userIndex], cars: updatedCars };
+        localStorage.setItem('users', JSON.stringify(users));
+        setCars(updatedCars);
+        setFormData({ brand: '', regNumber: '' });
+        console.log('Saved cars:', updatedCars);
     } catch {
-      setErrors({ api: 'Kunde inte spara bilen. Försök igen.' });
+        setErrors({ api: 'Kunde inte spara bilen. Försök igen.' });
     }
-  };
+};
 
-  const editCar = (car) => {
+const editCar = (car) => {
     setFormData({ brand: car.brand, regNumber: car.regNumber });
     setEditId(car.id);
     setErrors({});
     setSuccess('');
-  };
+};
 
-  const deleteCar = (id) => {
+const deleteCar = (id) => {
     try {
-      const token = localStorage.getItem('userToken');
-      if (!token) {
-        setErrors({ api: 'Ingen användare är inloggad.' });
-        return;
-      }
-
-      const email = token.replace('mock-token-', '');
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const userIndex = users.findIndex((u) => u.email === email);
-      if (userIndex === -1) {
-        setErrors({ api: 'Användaren hittades inte.' });
-        return;
-      }
-
-      const updatedCars = users[userIndex].cars.filter((car) => car.id !== id);
-      users[userIndex] = { ...users[userIndex], cars: updatedCars };
-      localStorage.setItem('users', JSON.stringify(users));
-      setCars(updatedCars);
-      setSuccess('Bil raderad!');
-      console.log('Deleted car, updated cars:', updatedCars); // Debug log
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            setErrors({ api: 'Ingen användare är inloggad.' });
+            return;
+        }
+        
+        // Decode base64 token and parse JSON
+        const decodedToken = JSON.parse(atob(token));
+        const email = decodedToken.email;
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const userIndex = users.findIndex((u) => u.email === email);
+        if (userIndex === -1) {
+            setErrors({ api: 'Användaren hittades inte.' });
+            return;
+        }
+        
+        const updatedCars = users[userIndex].cars.filter((car) => car.id !== id);
+        users[userIndex] = { ...users[userIndex], cars: updatedCars };
+        localStorage.setItem('users', JSON.stringify(users));
+        setCars(updatedCars);
+        setSuccess('Bil raderad!');
+        console.log('Deleted car, updated cars:', updatedCars);
     } catch {
-      setErrors({ api: 'Kunde inte radera bilen. Försök igen.' });
+        setErrors({ api: 'Kunde inte radera bilen. Försök igen.' });
     }
-  };
+};
 
-  return {
+return {
     formData,
     setFormData,
     cars,
@@ -128,7 +135,7 @@ function useCars() {
     saveCar,
     editCar,
     deleteCar,
-  };
+};
 }
 
 export default useCars;

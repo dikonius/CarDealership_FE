@@ -28,15 +28,17 @@ function FeatureFormPage() {
   const [showSuccessOnly, setShowSuccessOnly] = useState(false);
 
   // Fetch user's details and city from localStorage on component mount
-  useEffect(() => {
+// FeatureFormPage.jsx
+useEffect(() => {
   const token = localStorage.getItem('userToken');
   if (!token) {
     navigate('/login');
     return;
   }
   try {
-    // Extract email from token (e.g., 'mock-token-user@example.com' -> 'user@example.com')
-    const email = token.replace('mock-token-', '');
+    // Decode base64 token and parse JSON
+    const decodedToken = JSON.parse(atob(token));
+    const email = decodedToken.email;
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const currentUser = users.find((u) => u.email === email);
     if (currentUser) {
